@@ -1,16 +1,53 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Help Queue</title>
+    <title>Queue System</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      /* Add any custom styles for your app here */
+    </style>
   </head>
   <body>
-    <h1>Help Queue</h1>
-    <form>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name">
-      <button type="button" onclick="addToQueue()">Add to Queue</button>
+    <h1>Queue System</h1>
+    <form id="name-form">
+      <label for="name-input">Enter your name:</label>
+      <input type="text" id="name-input" required>
+      <button type="submit">Add to queue</button>
     </form>
-    <ol id="queue">
-    </ol>
+    <ul id="queue-list"></ul>
+    <script>
+      <script>
+  var queue = []; // initialize an empty queue
+
+  function addToQueue() {
+    var name = document.getElementById("name").value;
+    queue.push(name); // add the student's name to the queue
+    document.getElementById("name").value = ""; // clear the input field
+    updateQueue(); // update the queue display
+  }
+
+  function removeFromQueue(index) {
+    queue.splice(index, 1); // remove the student at the specified index
+    updateQueue(); // update the queue display
+  }
+
+  function updateQueue() {
+    var queueElement = document.getElementById("queue");
+    queueElement.innerHTML = ""; // clear the current queue display
+    for (var i = 0; i < queue.length; i++) {
+      var listItem = document.createElement("li");
+      var removeButton = document.createElement("button");
+      removeButton.innerHTML = "Remove";
+      removeButton.onclick = (function(index) {
+        return function() {
+          removeFromQueue(index);
+        };
+      })(i);
+      listItem.innerHTML = queue[i];
+      listItem.appendChild(removeButton);
+      queueElement.appendChild(listItem);
+    }
+  }
+    </script>
   </body>
 </html>
