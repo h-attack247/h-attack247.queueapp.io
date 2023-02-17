@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Help Queue</title>
+  </head>
+  <body>
+    <h1>Help Queue</h1>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name">
+      <button type="button" onclick="addToQueue()">Add to Queue</button>
+    </form>
+    <ol id="queue">
+    </ol>
+  </body>
+</html>
